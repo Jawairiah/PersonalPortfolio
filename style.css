@@ -1,0 +1,186 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+ background-color:#0C1544;
+ color:white;
+ 
+ font-family:'poppins';
+ 
+}
+nav{
+ display: flex;
+ position: fixed;
+ top:0px; 
+ margin: 0;
+ padding: 0;
+ justify-content: space-around; 
+ align-items: center;
+ height:70px;
+ width: 100%;
+ background-color: #14247A;
+ font-family: "Poppins";
+ }
+ nav ul{
+   display: flex;
+   justify-content:center;
+ }
+ nav ul li{
+   list-style: none;
+   margin : 0 23px;
+ }
+nav ul li a {
+color: white;
+text-decoration: none;
+}
+nav ul li a:hover{
+color:lavender;
+font-size:1.04rem;
+}
+ .left{
+    font-size: 1.5rem;
+ }
+ .firstSection{
+    display: flex;
+    justify-content: space-around;
+    margin: 79px 0;
+
+ }
+ 
+ .firstSection > div{
+    width:30%;
+ }
+ .leftSection{
+   font-size: 1.2rem;
+   margin: 30px 0;
+ }
+ .rightSection img{
+   width: 329px;
+   margin: 50px 0;
+   border-radius: 160px;
+ }
+ .name{
+   font-size: 1.3rem;
+   color:#445FE1;
+   font-family:"Lucida Handwriting";
+ }
+ .desc{
+   font-size: 3rem;
+   color:#20D3AD;
+   font-family: "poppins";
+ }
+.lowerSection{
+  color:white;
+  font-size:2rem;
+  justify-content:space-around;
+ margin: 30px 0;
+ width:60%;
+ justify-content:left;
+
+ 
+}
+.direct{
+margin:50px 90px;
+}
+.s{
+font-family: "Poppins";
+font-size:2.6rem;
+text-decoration: underline;
+border-radius:16px;
+
+}
+.designer{
+color:#12507A;
+background-color:#A7B0DC;
+width: 230px;
+height: 240px;
+border-radius:16px;
+margin:20px 10px 10px;
+font-size:1.8rem;
+text-decoration: underline;
+
+}
+.p{
+  margin:20px 0px 0px 0px;
+}
+.designer img{
+width: 220px;
+height: 136px;
+border-radius:50px;
+}
+.program{
+color:#12507A;
+background-color:#A7B0DC;
+width: 230px;
+height: 240px;
+border-radius:16px;
+margin: 20px 140px ;
+font-size:1.8rem;
+text-decoration: underline;
+
+}
+.program img{
+width: 230px;
+height: 160px;
+border-radius:50px;
+
+}
+.section2{
+ display:flex;    
+   
+
+ }
+.section2 > div{
+width:50%;
+}
+.UI{
+width:70%;
+font-size:1.4rem;
+justify-content:right;
+margin: 90px 100px 0px 2px;
+font-family:monospace;
+color:#84ABC4;
+
+}
+.a{
+font-family: "Poppins";
+font-size:2.6rem;
+text-decoration: underline;
+border-radius:16px;
+
+}
+.abt img{
+margin:20px 290px;
+width:300px;
+}
+.section3{
+ display:flex;    
+   
+
+ }
+.section3 > div{
+width:50%;
+}
+.certificates img{
+width:399px;
+height:280px;
+margin:30px;
+}
+.achievements img{
+width:390px;
+margin:30px 99px;
+}
+.foot{
+width:100%;
+height:80px;
+background-color:#14247A;
+}
+.p{
+font-family: "Poppins";
+font-size:2.6rem;
+text-decoration: underline;
+border-radius:16px;
+
+}
