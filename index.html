@@ -1,106 +1,971 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="Cascadingsheet.css">
-  <title>Jawairia portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;1,500;1,700&display=swap" rel="stylesheet">
- 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jawairia Hammad — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0f0f5;
+    --muted: #888896;
+    --faint: #444455;
+    --purple: #7c6dfa;
+    --purple-light: #a99dfc;
+    --purple-dim: rgba(124,109,250,0.12);
+    --purple-dim2: rgba(124,109,250,0.2);
+    --teal: #2dd4a0;
+    --teal-dim: rgba(45,212,160,0.1);
+    --amber: #f0a04b;
+    --amber-dim: rgba(240,160,75,0.1);
+    --pink: #f06292;
+    --blue: #5ba8f5;
+    --blue-dim: rgba(91,168,245,0.1);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--purple-light);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 2rem 4rem;
+  }
+
+  section { margin-bottom: 5rem; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    padding-top: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--teal);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-name {
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #f0f0f5 0%, #a99dfc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .hero-bio {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .hero-bio strong { color: var(--text); font-weight: 500; }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat-card {
+    background: var(--bg3);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .stat-card:hover { border-color: var(--border2); }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--purple-light);
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── CONTACT LINKS ── */
+  .contact-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .contact-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    border: 0.5px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg3);
+  }
+
+  .contact-btn:hover {
+    border-color: var(--purple);
+    color: var(--purple-light);
+    background: var(--purple-dim);
+  }
+
+  /* ── PROJECTS ── */
+  .proj-list { display: flex; flex-direction: column; gap: 14px; }
+
+  .proj-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proj-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent, var(--purple));
+    border-radius: 3px 0 0 3px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .proj-card:hover { border-color: var(--border2); background: var(--bg3); }
+  .proj-card:hover::before { opacity: 1; }
+
+  .proj-card.open::before { opacity: 1; }
+  .proj-card.open { border-color: var(--border2); }
+
+  .proj-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .proj-left { display: flex; align-items: center; gap: 12px; }
+
+  .proj-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .proj-title-wrap {}
+
+  .proj-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .proj-tagline {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .proj-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .proj-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 0.5px solid;
+  }
+
+  .proj-chevron {
+    color: var(--faint);
+    font-size: 18px;
+    transition: transform 0.25s;
+    line-height: 1;
+  }
+
+  .proj-card.open .proj-chevron { transform: rotate(180deg); }
+
+  .proj-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s;
+    opacity: 0;
+  }
+
+  .proj-card.open .proj-body {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .proj-inner {
+    padding-top: 1rem;
+    border-top: 0.5px solid var(--border);
+    margin-top: 1rem;
+  }
+
+  .proj-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .proj-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .highlight {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .highlight-num {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .highlight-lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .tech-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .tech-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .gh-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--purple-light);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 0.2s;
+  }
+
+  .gh-link:hover { opacity: 0.7; }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    padding: 1.25rem 0;
+    border-bottom: 0.5px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-role { font-size: 15px; font-weight: 500; color: var(--text); }
+  .exp-company { font-size: 13px; color: var(--purple-light); margin-top: 2px; }
+  .exp-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 8px; }
+  .exp-date { font-family: var(--mono); font-size: 11px; color: var(--faint); text-align: right; white-space: nowrap; }
+
+  .exp-metric {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    border: 0.5px solid;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+
+  .skill-group {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  .skill-group-name {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+    margin-bottom: 10px;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* ── CLOUD / CERT ── */
+  .cloud-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .cloud-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--amber-dim);
+    border: 0.5px solid rgba(240,160,75,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .cloud-title { font-size: 16px; font-weight: 500; color: var(--text); }
+  .cloud-sub { font-size: 13px; color: var(--amber); margin-top: 3px; font-family: var(--mono); }
+  .cloud-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+
+  .progress-bar-wrap {
+    flex: 1;
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--amber), var(--purple));
+    width: 0%;
+    transition: width 1.2s ease;
+  }
+
+  .progress-label { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+  /* ── EDUCATION ── */
+  .deans-banner {
+    background: var(--purple-dim2);
+    border: 0.5px solid rgba(124,109,250,0.3);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--purple-light);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
 </style>
 </head>
 <body>
-  <link rel="stylesheet" href="style.css">
-  <header>
-    <nav>
-      <div class="left">Jawairia's Portfolio</div>
-      <div class="right">
-        <ul>
-          <li><a href="#home">Home</a></li>
-       <li><a href="#about">About</a></li>
-       <li><a href="#skills"> Skills</a></li>
-        <li><a href="#connect"> Achievements</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section class="firstSection" id="home">
-        <div class="leftSection">
-          Hello, I'm <span class="name">Jawairia Hammad</span>
-          <div> <span class="desc">I'm a web developer </span> </div>
-          <div class="detail">I'm a full stack Web Developer with extensive experience. My expertise is create and design. </div>
-          
-        </div>
-        <div class="rightSection">
-          <img src="https://th.bing.com/th/id/OIG.CcDZH2VoKFkzs7bM5rbD?w=270&h=270&c=6&r=0&o=5&pid=ImgGn"
-        </div>
-          <hr>
-          <hr>
-      </section>
-        <hr>
-          <hr>
-        <section id="about" class="direct">
-          <h1 style="text-align:center" class="p">About</h1>
-          <p style="text-align:left">As a passionate web developer, I bring a wealth of experience and exposure to the digital landscape. With a fervent dedication to crafting engaging online experiences, I thrive on blending creativity and functionality. My journey in web development has been defined by a relentless pursuit of excellence, exploring diverse technologies, and adapting to ever-evolving trends. Through extensive experience, I've honed a keen eye for detail, ensuring each project I undertake not only meets but exceeds expectations. With an ardent enthusiasm for creating seamless, user-centric designs, I am driven to push boundaries and deliver innovative solutions in the dynamic realm of web development.</p>
-          <br>
-          <div class="abt">
-          <img src="https://th.bing.com/th/id/OIG.t.jE.k.cV1G.IWXd5P3d?w=270&h=270&c=6&r=0&o=5&pid=ImgGn"></div> 
-        </section>
-        <section class="secondSection" id="skills">
-          <hr>
-          <hr>
-          <h1 class="s" style="text-align:center"> SKILLS</h1> 
-          <div class="section2">
-          <div class="lowerSection">
-            
-            
-    <div class="designer" style="text-align:center">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn9KyUdiGdIsB8S4lYDVm7Ur2N8UIS-AKCXg&usqp=CAU="></img>
-                 
-              UI and UX 
-              Designer
-          </div>
-          <div class="program" style="text-align:center">
-            <img src="data:image/png;base64,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"></img>
-          C-Programmer
-          </div>
-          </div>
-        <div class="UI">
-       <p>   A UI (User Interface) developer specializes in designing and developing the visual and interactive components of websites, web applications, and mobile applications. The user interface has a direct impact on user experience.
-          </p><br><br>
-        <p>  A C Programmer is someone responsible for developing the code that integrates into an operating system, as well as other operating system modules, low-level libraries for other high-level languages, and embedded systems. C is a versatile and flexible programming language that is used for a wide range of purposes.</p></br>
-        </div>
-        
-          </div>
-        </section>
 
-         <section class="thirdSection" id="connect">
-          <hr>
-          <hr>
-          <h1 class="a" style="text-align:center">ACHIEVEMENTS </h1> 
-          <div class="section3">
-          <div class="achievements" >
-            <img src="https://talk.openmrs.org/uploads/default/original/2X/8/8b7fd00a53abb46fa737e351b50009da2fd00070.png"></img>
-    
-            </div>
-           <div class="certificates">
-             <img src="https://th.bing.com/th/id/OIG.crMxSlyRAWqjWZ9vWgTp?pid=ImgGn"></img>
-           
-           </div>
-            </div>
-    <p style="text-align:center" id="card"></p><br>
-    </section>
-      </main>
-   <footer class="foot">
-     <p style="text-align:center" >Contact me on</p>
-     <p  style="text-align:center"> LinkedIn &nbsp Twitter &nbsp Instagram</p>
-   <p style="text-align:center">&copy; 2023 Jawairia</p>
- </footer>
+<nav>
+  <span class="nav-logo">jawairia.dev</span>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#cloud">Cloud</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="mailto:jawairiahammad18@gmail.com">Contact</a></li>
+  </ul>
+</nav>
 
-<script src="javA.JS"></script>
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-eyebrow">
+      <span>$ software_engineer --location="Karachi, PK"</span>
+      <span class="cursor"></span>
+    </div>
+    <h1 class="hero-name">Jawairia Hammad</h1>
+    <p class="hero-sub">Full-Stack Engineer · Deep Learning · Cloud</p>
+    <p class="hero-bio">
+      CS student at <strong>FAST-NUCES</strong> (GPA 3.8/4.0, graduating 2027) with real production experience building APIs, full-stack apps, and AI systems. <strong>6× Dean's List.</strong> AWS Certified, pursuing Solutions Architect.
+    </p>
+
+    <div class="stats-row reveal">
+      <div class="stat-card">
+        <div class="stat-num">3.8</div>
+        <div class="stat-lbl">GPA / 4.0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6×</div>
+        <div class="stat-lbl">Dean's List</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6+</div>
+        <div class="stat-lbl">Industry-relevant projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-lbl">Professional roles</div>
+      </div>
+    </div>
+
+    <div class="contact-row reveal">
+      <a class="contact-btn" href="mailto:jawairiahammad18@gmail.com">✉ Email</a>
+      <a class="contact-btn" href="https://github.com/Jawairiah" target="_blank">⌥ GitHub</a>
+      <a class="contact-btn" href="https://www.linkedin.com/in/jawairia-hammad" target="_blank">in LinkedIn</a>
+      <a class="contact-btn" href="https://www.credly.com/users/jawairia-hammad" target="_blank">☁ Credly</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <div class="proj-list" id="projList"></div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-role">Software Engineer Intern</div>
+          <div class="exp-company">10Pearls</div>
+          <div class="exp-desc">Built scalable RESTful APIs with Node.js and PostgreSQL, containerized services with Docker, and wrote automated test suites with Mocha, Chai, and Jest. Contributed React components to a live production system.</div>
+          <span class="exp-metric" style="background: var(--purple-dim); color: var(--purple-light); border-color: rgba(124,109,250,0.3);">Node.js · Docker · PostgreSQL · Jest</span>
+        </div>
+        <div class="exp-date">Dec 2025 – Mar 2026</div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-role">Backend Developer — Django / DRF</div>
+          <div class="exp-company">Bridge of Hope</div>
+          <div class="exp-desc">Designed and implemented fine-grained role-based access control using Django REST Framework — teachers access only their classrooms, students only their own data — reducing unauthorized access surface to zero.</div>
+          <span class="exp-metric" style="background: var(--teal-dim); color: var(--teal); border-color: rgba(45,212,160,0.25);">Role-based API · Zero privilege escalation</span>
+        </div>
+        <div class="exp-date">Jul 2025 – Dec 2025</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CLOUD -->
+  <section id="cloud">
+    <div class="section-label">Cloud & AWS</div>
+
+    <div class="cloud-card reveal">
+      <div class="cloud-icon-wrap">☁</div>
+      <div>
+        <div class="cloud-title">AWS Certified Cloud Practitioner</div>
+        <div class="cloud-sub">↳ Now preparing: Solutions Architect Associate</div>
+        <div class="cloud-desc">
+          The certification is intentional — not a box to tick. The goal is to bridge dev and cloud: understanding how to architect, deploy, and scale the systems I build. Currently deep in SAA prep (VPCs, IAM, RDS, EC2, S3, Lambda, load balancing).
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">SAA prep</span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="saaBar" style="width:0%"></div>
+          </div>
+          <span class="progress-label">In progress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Technical skills</div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-name">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Backend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">DRF</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">REST APIs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">React.js</span>
+          <span class="skill-tag">Tailwind</span>
+          <span class="skill-tag">HTML5</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">ML / CV</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">ResNet-50</span>
+          <span class="skill-tag">OpenCV</span>
+          <span class="skill-tag">MediaPipe</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">DevOps / Cloud</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Education</div>
+
+    <div class="deans-banner reveal">
+      🏆 &nbsp;Dean's List — 6 consecutive semesters at FAST-NUCES
+    </div>
+
+    <div class="exp-list">
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-role">BSc Computer Science</div>
+          <div class="exp-company">FAST-NUCES, Karachi</div>
+          <div class="exp-desc">GPA 3.8/4.0 · Graduating 2027</div>
+        </div>
+        <div class="exp-date">2023 – 2027</div>
+      </div>
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-role">Pre-Engineering</div>
+          <div class="exp-company">Aga Khan Higher Secondary School</div>
+          <div class="exp-desc">Grade: 88% — A+</div>
+        </div>
+        <div class="exp-date">2023</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Built by Jawairia Hammad · <a href="mailto:jawairiahammad18@gmail.com" style="color: var(--purple-light); text-decoration: none;">jawairiahammad18@gmail.com</a>
+</footer>
+
+<script>
+const PROJECTS = [
+  {
+    name: "EmoFocus",
+    tagline: "Real-time student engagement monitoring via facial emotion recognition",
+    badge: "Deep Learning",
+    badgeColor: { bg: "rgba(124,109,250,0.12)", color: "#a99dfc", border: "rgba(124,109,250,0.3)" },
+    accentColor: "#7c6dfa",
+    icon: "🧠",
+    iconBg: "rgba(124,109,250,0.12)",
+    desc: "Fine-tuned ResNet-50 on 35,000+ facial images to classify 7 emotions per webcam frame. Feeds a rolling focus score (0–100) and fires contextual nudges on sustained disengagement. All inference runs locally — no frames leave the device.",
+    highlights: [
+      { num: "73%", lbl: "Test accuracy on FER-2013" },
+      { num: "35K+", lbl: "Training images" },
+      { num: "~20fps", lbl: "Real-time inference" },
+      { num: "7", lbl: "Emotion classes" },
+    ],
+    tech: ["PyTorch", "ResNet-50", "MediaPipe", "OpenCV", "Streamlit", "Plotly", "FER-2013"],
+    github: "https://github.com/Jawairiah/EmoFocus",
+    highlightColor: "#7c6dfa"
+  },
+  {
+    name: "Marketeer AI",
+    tagline: "AI-generated Meta ad strategies for small businesses",
+    badge: "AI / Web",
+    badgeColor: { bg: "rgba(45,212,160,0.1)", color: "#2dd4a0", border: "rgba(45,212,160,0.3)" },
+    accentColor: "#2dd4a0",
+    icon: "📣",
+    iconBg: "rgba(45,212,160,0.1)",
+    desc: "Generates complete Meta Ads campaign structures, bilingual (Urdu/English) ad copy, and budget plans for small business owners with no marketing background. Export-ready output in one click.",
+    highlights: [
+      { num: "2", lbl: "Languages supported (Urdu/EN)" },
+      { num: "1-click", lbl: "Export-ready output" },
+    ],
+    tech: ["React.js", "Tailwind CSS", "Gemini API", "JavaScript"],
+    github: "https://github.com/Jawairiah/Marketeer-AI",
+    highlightColor: "#2dd4a0"
+  },
+  {
+    name: "MediCare",
+    tagline: "Full-stack healthcare appointment platform",
+    badge: "Full-Stack",
+    badgeColor: { bg: "rgba(240,160,75,0.1)", color: "#f0a04b", border: "rgba(240,160,75,0.3)" },
+    accentColor: "#f0a04b",
+    icon: "🏥",
+    iconBg: "rgba(240,160,75,0.1)",
+    desc: "Patients book, reschedule, and cancel appointments with verified doctors. Role-based access separates patient and staff views. Real-time availability updates via React state. Full unit test coverage with PyTest and Postman.",
+    highlights: [
+      { num: "2", lbl: "User roles (patient / staff)" },
+      { num: "100%", lbl: "Endpoints tested with PyTest" },
+    ],
+    tech: ["Django", "Django REST Framework", "PostgreSQL", "React.js", "PyTest", "Postman"],
+    github: "https://github.com/Jawairiah/MediCare",
+    highlightColor: "#f0a04b"
+  },
+  {
+    name: "Friend Network Connect",
+    tagline: "Graph-based social networking app",
+    badge: "DSA / Web",
+    badgeColor: { bg: "rgba(91,168,245,0.1)", color: "#5ba8f5", border: "rgba(91,168,245,0.3)" },
+    accentColor: "#5ba8f5",
+    icon: "🔗",
+    iconBg: "rgba(91,168,245,0.1)",
+    desc: "Friend suggestions and connections resolved through graph traversal algorithms. Firebase handles authentication and real-time data sync — delivering a seamless social experience without a custom backend.",
+    highlights: [
+      { num: "Graph", lbl: "DSA-powered connections" },
+      { num: "Real-time", lbl: "Firebase sync" },
+    ],
+    tech: ["React.js", "Firebase", "JavaScript", "Graph DSA"],
+    github: "https://github.com/Jawairiah/Friend-Connect-App",
+    highlightColor: "#5ba8f5"
+  },
+  {
+    name: "Chess Master",
+    tagline: "Console chess engine with puzzle mode in C++",
+    badge: "C++ / OOP",
+    badgeColor: { bg: "rgba(240,98,146,0.1)", color: "#f06292", border: "rgba(240,98,146,0.3)" },
+    accentColor: "#f06292",
+    icon: "♟",
+    iconBg: "rgba(240,98,146,0.1)",
+    desc: "Two-player chess with full rule enforcement. Puzzle mode pulls FEN strings from the Lichess database — a unique board every session. Tracks win/loss history across games.",
+    highlights: [
+      { num: "Full", lbl: "Chess rule enforcement" },
+      { num: "∞", lbl: "Unique puzzles (Lichess DB)" },
+    ],
+    tech: ["C++", "OOP", "FEN strings", "Lichess DB"],
+    github: "https://github.com/Jawairiah/ChessMaster",
+    highlightColor: "#f06292"
+  },
+  {
+    name: "Ecommerce Inventory Manager",
+    tagline: "Thread-safe inventory system using multi-threading, mutex & locks",
+    badge: "Systems / C++",
+    badgeColor: { bg: "rgba(240,160,75,0.1)", color: "#f0a04b", border: "rgba(240,160,75,0.3)" },
+    accentColor: "#f0a04b",
+    icon: "🔒",
+    iconBg: "rgba(240,160,75,0.1)",
+    desc: "Concurrent inventory management system built in C++ using multi-threading, mutex locks, and synchronization primitives to safely handle simultaneous stock reads and writes. Demonstrates OS-level understanding of race condition prevention and thread coordination.",
+    highlights: [
+      { num: "0", lbl: "Race conditions — mutex-safe" },
+      { num: "Multi", lbl: "Threaded concurrent access" },
+    ],
+    tech: ["C++", "Multi-threading", "Mutex", "Locks", "Synchronization"],
+    github: "https://github.com/Jawairiah/Ecommerce-Inventory-Manager",
+    highlightColor: "#f0a04b"
+  },
+  {
+    name: "CalcScript",
+    tagline: "Custom interpreted programming language with a full compiler pipeline",
+    badge: "Compiler",
+    badgeColor: { bg: "rgba(124,109,250,0.12)", color: "#a99dfc", border: "rgba(124,109,250,0.3)" },
+    accentColor: "#a99dfc",
+    icon: "⚙",
+    iconBg: "rgba(124,109,250,0.12)",
+    desc: "Built a complete language from scratch: lexer → recursive-descent parser → AST → semantic analyser → tree-walk interpreter. Supports variables, trig functions, loops, conditionals, user-defined functions, and an interactive REPL with precise error messages.",
+    highlights: [
+      { num: "5-stage", lbl: "Full compiler pipeline" },
+      { num: "REPL", lbl: "Interactive mode" },
+      { num: "4", lbl: "Error types with line/col info" },
+    ],
+    tech: ["Python", "Lexer", "AST", "Recursive Descent", "Semantic Analysis"],
+    github: "https://github.com/Jawairiah/CalcScript_Compiler-Design",
+    highlightColor: "#a99dfc"
+  }
+];
+
+function renderProjects() {
+  const list = document.getElementById('projList');
+  PROJECTS.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'proj-card reveal';
+    card.style.setProperty('--accent', p.accentColor);
+
+    const highlightsHTML = p.highlights.map(h => `
+      <div class="highlight">
+        <div class="highlight-num" style="color:${p.highlightColor}">${h.num}</div>
+        <div class="highlight-lbl">${h.lbl}</div>
+      </div>
+    `).join('');
+
+    const techHTML = p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+
+    card.innerHTML = `
+      <div class="proj-header">
+        <div class="proj-left">
+          <div class="proj-icon" style="background:${p.iconBg}">${p.icon}</div>
+          <div class="proj-title-wrap">
+            <div class="proj-name">${p.name}</div>
+            <div class="proj-tagline">${p.tagline}</div>
+          </div>
+        </div>
+        <div class="proj-right">
+          <span class="proj-badge" style="background:${p.badgeColor.bg};color:${p.badgeColor.color};border-color:${p.badgeColor.border}">${p.badge}</span>
+          <span class="proj-chevron">⌄</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-inner">
+          <p class="proj-desc">${p.desc}</p>
+          <div class="proj-highlights">${highlightsHTML}</div>
+          <div class="tech-row">${techHTML}</div>
+          <a class="gh-link" href="${p.github}" target="_blank">⌥ ${p.github.replace('https://github.com/', 'github.com/')}</a>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.proj-card').forEach(c => c.classList.remove('open'));
+      if (!isOpen) card.classList.add('open');
+    });
+
+    list.appendChild(card);
+  });
+}
+
+// Scroll reveal
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+// Progress bar animation
+function animateProgress() {
+  const bar = document.getElementById('saaBar');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => { bar.style.width = '45%'; }, 300);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  obs.observe(bar);
+}
+
+renderProjects();
+setTimeout(() => {
+  initReveal();
+  animateProgress();
+}, 50);
+</script>
 </body>
 </html>
